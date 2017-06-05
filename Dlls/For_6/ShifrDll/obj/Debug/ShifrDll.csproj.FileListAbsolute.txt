@@ -1,0 +1,6 @@
+D:\Git\OOP_5\ShifrDll\bin\Debug\ShifrDll.dll
+D:\Git\OOP_5\ShifrDll\bin\Debug\ShifrDll.pdb
+D:\Git\OOP_5\ShifrDll\bin\Debug\ShifrInterface.dll
+D:\Git\OOP_5\ShifrDll\bin\Debug\ShifrInterface.pdb
+D:\Git\OOP_5\ShifrDll\obj\Debug\ShifrDll.dll
+D:\Git\OOP_5\ShifrDll\obj\Debug\ShifrDll.pdb

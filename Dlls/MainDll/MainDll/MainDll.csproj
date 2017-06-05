@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F462680A-13E6-474E-B47C-9E5F4DB83B45}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MainDll</RootNamespace>
+    <AssemblyName>MainDll</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="ShifrDll">
+      <HintPath>..\..\For_6\ShifrDll\bin\Debug\ShifrDll.dll</HintPath>
+    </Reference>
+    <Reference Include="ShifrInterface">
+      <HintPath>..\..\For_6\ShifrInterface\bin\Debug\ShifrInterface.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Books\Book.cs" />
+    <Compile Include="Books\Encyclopedia.cs" />
+    <Compile Include="Books\Fiction.cs" />
+    <Compile Include="Books\Fictions\FairyTales.cs" />
+    <Compile Include="Books\Fictions\FantasticTales.cs" />
+    <Compile Include="Books\Fictions\ScienceFiction.cs" />
+    <Compile Include="Books\Fictions\Travelling.cs" />
+    <Compile Include="Books\Historical.cs" />
+    <Compile Include="Books\History\Art.cs" />
+    <Compile Include="Books\History\Biography.cs" />
+    <Compile Include="Helpers\FormCreator.cs" />
+    <Compile Include="Helpers\Hierarchy.cs" />
+    <Compile Include="Helpers\Formatters\IFormatter.cs" />
+    <Compile Include="Helpers\IPlugin.cs" />
+    <Compile Include="Helpers\ItemInList.cs" />
+    <Compile Include="Helpers\LoaderManager.cs" />
+    <Compile Include="Helpers\Serialization\IFormatPlugin.cs" />
+    <Compile Include="Helpers\Serialization\ISerializer.cs" />
+    <Compile Include="Helpers\Serialization\JSONSerializer.cs" />
+    <Compile Include="Helpers\Serialization\SerializerManager.cs" />
+    <Compile Include="Loaders\BookLoader.cs" />
+    <Compile Include="Loaders\EncyclopediaLoader.cs" />
+    <Compile Include="Loaders\FictionLoader.cs" />
+    <Compile Include="Loaders\FictionsLoaders\FairyTalesLoader.cs" />
+    <Compile Include="Loaders\FictionsLoaders\FantasticTalesLoader.cs" />
+    <Compile Include="Loaders\FictionsLoaders\ScienceFictionLoader.cs" />
+    <Compile Include="Loaders\FictionsLoaders\TravellingLoader.cs" />
+    <Compile Include="Helpers\Formatters\FormatterManager.cs" />
+    <Compile Include="Loaders\HistoricalLoader.cs" />
+    <Compile Include="Loaders\HistoryLoaders\ArtLoader.cs" />
+    <Compile Include="Loaders\HistoryLoaders\BiographyLoader.cs" />
+    <Compile Include="Helpers\Structure.cs" />
+    <Compile Include="Helpers\Formatters\IFormatterPlugin.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

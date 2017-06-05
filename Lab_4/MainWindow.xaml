@@ -1,0 +1,21 @@
+﻿<Window x:Class="Lab_4.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lab_4"
+        mc:Ignorable="d"
+        Title="JSON Serialization" Height="426" Width="909">
+    <Grid x:Name="MainGrid">
+        <ListView x:Name="BookListForm" Margin="542,60,0,0" SelectionChanged="BookListForm_SelectionChanged" HorizontalAlignment="Left" Width="320" Height="312" VerticalAlignment="Top">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Type" Width="94" DisplayMemberBinding="{Binding Type}"/>
+                    <GridViewColumn Header="Name" Width="111" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Author" Width="107" DisplayMemberBinding="{Binding Author}"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Data}" Width="0"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>
