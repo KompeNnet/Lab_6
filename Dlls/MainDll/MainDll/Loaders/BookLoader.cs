@@ -257,6 +257,7 @@ namespace Lab_4.Loaders
                                         {
                                             stream.WriteLine(" : " + words[i - 1] + " : " + formatter.ReFormat(words[i]));
                                         }
+                                        words = Regex.Split(stream.ToString(), " : ");
                                     }
                                     finally { stream.Dispose(); stream.Close(); }
                                 }

@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XMLFormatter", "..\XMLForma
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adapter", "..\Adapter\Adapter.csproj", "{11FC7BEE-7E56-446A-BF8E-CB874C597C06}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShifrDll", "..\For_6\ShifrDll\ShifrDll.csproj", "{B4B73A6A-FED2-4A89-BA5E-0548225CC97B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{11FC7BEE-7E56-446A-BF8E-CB874C597C06}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11FC7BEE-7E56-446A-BF8E-CB874C597C06}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11FC7BEE-7E56-446A-BF8E-CB874C597C06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4B73A6A-FED2-4A89-BA5E-0548225CC97B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4B73A6A-FED2-4A89-BA5E-0548225CC97B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4B73A6A-FED2-4A89-BA5E-0548225CC97B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4B73A6A-FED2-4A89-BA5E-0548225CC97B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

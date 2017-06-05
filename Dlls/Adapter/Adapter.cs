@@ -32,12 +32,12 @@ namespace Lab_4.Helpers.Formatters
         public string ReFormat(string input)
         {
             byte[] ar = Encoding.Default.GetBytes(input);
-            using (FileStream fs = new FileStream("temp.Base64", FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream("temp.Base64", FileMode.Create))
             {
                 fs.Write(ar, 0, ar.Length);
             }
 
-            Base64Encrypt("temp.Base64", "temp");
+            Base64Decrypt("temp.Base64", "temp");
 
             string result = "";
             using (FileStream fstream = File.OpenRead("temp.decr"))

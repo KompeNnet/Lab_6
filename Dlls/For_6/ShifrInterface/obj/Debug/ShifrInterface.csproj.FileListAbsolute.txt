@@ -2,3 +2,8 @@ D:\Git\OOP_5\ShifrInterface\bin\Debug\ShifrInterface.dll
 D:\Git\OOP_5\ShifrInterface\bin\Debug\ShifrInterface.pdb
 D:\Git\OOP_5\ShifrInterface\obj\Debug\ShifrInterface.dll
 D:\Git\OOP_5\ShifrInterface\obj\Debug\ShifrInterface.pdb
+C:\Users\Krompy\Downloads\OOP_5-master\ShifrInterface\bin\Debug\ShifrInterface.dll
+C:\Users\Krompy\Downloads\OOP_5-master\ShifrInterface\bin\Debug\ShifrInterface.pdb
+C:\Users\Krompy\Downloads\OOP_5-master\ShifrInterface\obj\Debug\ShifrInterface.csprojResolveAssemblyReference.cache
+C:\Users\Krompy\Downloads\OOP_5-master\ShifrInterface\obj\Debug\ShifrInterface.dll
+C:\Users\Krompy\Downloads\OOP_5-master\ShifrInterface\obj\Debug\ShifrInterface.pdb
