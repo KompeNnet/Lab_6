@@ -190,7 +190,7 @@ namespace Lab_4.Loaders
                                     string[] words = Regex.Split(writer.ToString(), " : ");
                                     for (int i = 2; i < words.Count(); i += 2)
                                     {
-                                        stream.WriteLine(formatter.Format(words[i]));
+                                        stream.WriteLine(" : " + words[i - 1] + " : " + formatter.Format(words[i]));
                                     }
                                 }
                                 finally { stream.Dispose(); stream.Close(); }
@@ -235,24 +235,55 @@ namespace Lab_4.Loaders
                 {
                     item = reader.ReadToEnd();
                     string[] words = Regex.Split(item, " : ");
-                    for (int i = 1; i < words.Count(); i += 2)
+                    try
                     {
-                        item = words[i + 1];
-                        try
+                        Menu menu = new Menu();
+                        menu = g.Children.OfType<Menu>().First(x => x.Name == "Formattions");
+
+                        reader.Dispose();
+                        reader.Close();
+                        foreach (MenuItem smth in menu.Items)
                         {
-                            var loader = LoaderManager.GetLoader(words[i]);
-                            Book book = loader.Deserialize(item, serializer);
-                            bookListForm.Items.Add(new ItemInList { Type = words[i], Name = book.Name, Author = book.Author, Data = book });
-                        }
-                        catch
-                        {
-                            loadingErrors += words[i] + "\n";
+                            MenuItem subItem = (MenuItem)smth.Items[0];
+                            IFormatter formatter = FormatterManager.GetByKey(smth.Name);
+                            if (subItem.IsChecked)
+                            {
+                                if (formatter.IsCompatible(Path.GetExtension(dlg.FileName)))
+                                {
+                                    TextWriter stream = new StringWriter();
+                                    try
+                                    {
+                                        for (int i = 2; i < words.Count(); i += 2)
+                                        {
+                                            stream.WriteLine(" : " + words[i - 1] + " : " + formatter.ReFormat(words[i]));
+                                        }
+                                    }
+                                    finally { stream.Dispose(); stream.Close(); }
+                                }
+                            }
                         }
                     }
-                    if (loadingErrors != "")
+                    finally
                     {
-                        MessageBox.Show(loadingErrors, "Unknown types were not serializated:", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
+                        for (int i = 1; i < words.Count(); i += 2)
+                        {
+                            item = words[i + 1];
+                            try
+                            {
+                                var loader = LoaderManager.GetLoader(words[i]);
+                                Book book = loader.Deserialize(item, serializer);
+                                bookListForm.Items.Add(new ItemInList { Type = words[i], Name = book.Name, Author = book.Author, Data = book });
+                            }
+                            catch
+                            {
+                                loadingErrors += words[i] + "\n";
+                            }
+                        }
+                        if (loadingErrors != "")
+                        {
+                            MessageBox.Show(loadingErrors, "Unknown types were not serializated:", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                    }                    
                 }
                 catch { MessageBox.Show("Smth wrong with loaded file. Please, try again.", "Oups!", MessageBoxButton.OK, MessageBoxImage.Error); }                
                 reader.Dispose();
