@@ -14,7 +14,7 @@ namespace Lab_4.Helpers
     {
         private static Dictionary<string, Hierarchy> loaderDict = new Dictionary<string, Hierarchy>
         {
-            { "Book", new Hierarchy(new BookLoader(), new List<string>() { "Encyclopedia", "Fiction", "Historical" } ) },
+            { "Book", new Hierarchy(new EncyclopediaLoader(), new List<string>() { "Encyclopedia", "Fiction", "Historical" } ) },
             { "Encyclopedia", new Hierarchy(new EncyclopediaLoader(), new List<string>() ) },
             { "Historical",new Hierarchy(new HistoricalLoader(), new List<string>() { "Art", "Biography" } ) },
             { "Art", new Hierarchy(new ArtLoader(), new List<string>() ) },

@@ -55,7 +55,7 @@ namespace Lab_4.Loaders
             return g;
         }
 
-        public GroupBox CreateButtonsGroup(string bookType)
+        public GroupBox CreateButtonsGroup()
         {
             Grid g = FormCreator.CreateGrid(new Thickness(0, 0, 0, 0));
 
@@ -438,7 +438,7 @@ namespace Lab_4.Loaders
 
                 Grid newGrid = b.Load(b.BaseCreate(oldGroupBox));   // create new Grid
                 AddMainMenu(sender);
-                newGrid.Children.Add(b.CreateButtonsGroup(selectedText));         // add buttons on it
+                newGrid.Children.Add(b.CreateButtonsGroup());         // add buttons on it
 
                 GroupBox newGroupBox = FormCreator.CreateGroupBox("MainGroup", "Book", new Thickness(0, 0, 0, 0), 887, 384);
                 newGroupBox.Content = newGrid;                      // wrap Grid into new MainGroupBox

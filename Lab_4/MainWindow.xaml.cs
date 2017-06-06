@@ -19,8 +19,8 @@ namespace Lab_4
             InitializeComponent();
 
             GroupBox newGroupBox = FormCreator.CreateGroupBox("MainGroup", "Book", new Thickness(0, 0, 0, 0), 887, 384);
-            Grid g = new BookLoader().Load(new Book());
-            g.Children.Add(new BookLoader().CreateButtonsGroup("Book"));
+            Grid g = new EncyclopediaLoader().Load(new Encyclopedia());
+            g.Children.Add(new EncyclopediaLoader().CreateButtonsGroup());
             newGroupBox.Content = g;
 
             MainGrid.Children.Add(newGroupBox);
@@ -42,7 +42,7 @@ namespace Lab_4
 
                 GroupBox newGroupBox = FormCreator.CreateGroupBox("MainGroup", "Book", new Thickness(0, 0, 0, 0), 887, 384);
                 Grid g = loader.Load(elem.Data);
-                g.Children.Add(loader.CreateButtonsGroup(elem.Type));
+                g.Children.Add(loader.CreateButtonsGroup());
                 newGroupBox.Content = g;
 
                 MainGrid.Children.Add(newGroupBox);
