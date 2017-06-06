@@ -6,17 +6,28 @@ namespace Lab_4.Helpers.Serialization
 {
     public class SerializerManager
     {
-        public static Dictionary<string, ISerializer> serializersDict = new Dictionary<string, ISerializer>
+        private static readonly SerializerManager instance = new SerializerManager();
+
+        public static SerializerManager GetInstance { get { return instance; } }
+
+        protected SerializerManager() { }
+
+        private Dictionary<string, ISerializer> serializersDict = new Dictionary<string, ISerializer>
         {
             { "json", new JSONSerializer() }
         };
 
-        public static List<string> availableFormats = new List<string>
+        private List<string> availableFormats = new List<string>
         {
             "json"
         };
 
-        public static void LoadFormat(string type, ISerializer serializer)
+        public List<string> GetAvailableFormats()
+        {
+            return availableFormats;
+        }
+
+        public void LoadFormat(string type, ISerializer serializer)
         {
             try
             {
@@ -29,7 +40,7 @@ namespace Lab_4.Helpers.Serialization
             }
         }
 
-        public static ISerializer GetSerializer(string key)
+        public ISerializer GetSerializer(string key)
         {
             return serializersDict[key];
         }

@@ -159,7 +159,8 @@ namespace Lab_4.Loaders
             ListView bookListForm = g.Children.OfType<ListView>().First(x => x.Name == "BookListForm");
 
             SaveFileDialog dlg = new SaveFileDialog() { FileName = "bookList.json" };
-            foreach (string item in SerializerManager.availableFormats)
+            SerializerManager manager = SerializerManager.GetInstance;
+            foreach (string item in manager.GetAvailableFormats())
             {
                 try { dlg.Filter += item.ToUpper() + " files | *." + item; }
                 catch { dlg.Filter += "| " + item.ToUpper() + " files | *." + item; }
@@ -168,7 +169,8 @@ namespace Lab_4.Loaders
             if (dlg.ShowDialog() == true)
             {
                 TextWriter writer = new StringWriter();
-                ISerializer serializer = SerializerManager.GetSerializer((Path.GetExtension(dlg.FileName)).Substring(1));
+                
+                ISerializer serializer = manager.GetSerializer((Path.GetExtension(dlg.FileName)).Substring(1));
                 foreach (ItemInList item in bookListForm.SelectedItems) { writer.WriteLine(" : " + item.Type + " : " + serializer.Serialize(item.Data)); }
 
                 try
@@ -219,7 +221,9 @@ namespace Lab_4.Loaders
             ListView bookListForm = g.Children.OfType<ListView>().First(x => x.Name == "BookListForm");
 
             OpenFileDialog dlg = new OpenFileDialog();
-            foreach (string item in SerializerManager.availableFormats)
+
+            SerializerManager manager = SerializerManager.GetInstance;
+            foreach (string item in manager.GetAvailableFormats())
             {
                 try { dlg.Filter += item.ToUpper() + " files | *." + item; }
                 catch { dlg.Filter += "| " + item.ToUpper() + " files | *." + item; }
@@ -228,7 +232,7 @@ namespace Lab_4.Loaders
             if (dlg.ShowDialog() == true)
             {
                 StreamReader reader = new StreamReader(dlg.OpenFile());
-                ISerializer serializer = SerializerManager.GetSerializer((Path.GetExtension(dlg.FileName)).Substring(1));
+                ISerializer serializer = manager.GetSerializer((Path.GetExtension(dlg.FileName)).Substring(1));
                 string item;
                 string loadingErrors = "";
                 try
@@ -264,6 +268,7 @@ namespace Lab_4.Loaders
                             }
                         }
                     }
+                    catch { }
                     finally
                     {
                         for (int i = 1; i < words.Count(); i += 2)
@@ -343,10 +348,11 @@ namespace Lab_4.Loaders
             List<Type> pluginTypes = GetTypes<IFormatPlugin>(mainAssembly);
             if (pluginTypes.Count != 0)
             {
+                SerializerManager manager = SerializerManager.GetInstance;
                 foreach (Type item in pluginTypes)
                 {
                     IFormatPlugin plugin = Activator.CreateInstance(item) as IFormatPlugin;
-                    SerializerManager.LoadFormat(plugin.GetName(), plugin.GetSerializer());
+                    manager.LoadFormat(plugin.GetName(), plugin.GetSerializer());
                 }
             }
         }
