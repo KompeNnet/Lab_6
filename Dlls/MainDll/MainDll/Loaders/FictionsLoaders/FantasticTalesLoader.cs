@@ -37,7 +37,7 @@ namespace Lab_4.Loaders.FictionsLoaders
             grg.Children.Add(FormCreator.CreateTextBox("InpFictFantCoWorkers", f.CoAuthors, new Thickness(10, 37, 0, 0)));
             grg.Children.Add(FormCreator.CreateLabel("Type", new Thickness(10, 59, 0, 0)));
 
-            ComboBox cb = FormCreator.CreateComboBox("ChooseFictFantType", new Thickness(10, 87, 0, 0), LoaderManager.GetChildren("FantasticTales"));
+            ComboBox cb = FormCreator.CreateComboBox("ChooseFictFantType", new Thickness(10, 87, 0, 0), LoaderManager.GetInstance.GetChildren("FantasticTales"));
             cb.SelectionChanged += new SelectionChangedEventHandler(SelectionChanged);
             grg.Children.Add(cb);
 

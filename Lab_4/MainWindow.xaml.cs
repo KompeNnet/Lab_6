@@ -38,7 +38,7 @@ namespace Lab_4
 
                 ItemInList elem = (ItemInList)BookListForm.Items.GetItemAt(BookListForm.SelectedIndex);
 
-                var loader = LoaderManager.GetLoader(elem.Type);
+                var loader = LoaderManager.GetInstance.GetLoader(elem.Type);
 
                 GroupBox newGroupBox = FormCreator.CreateGroupBox("MainGroup", "Book", new Thickness(0, 0, 0, 0), 887, 384);
                 Grid g = loader.Load(elem.Data);

@@ -12,7 +12,13 @@ namespace Lab_4.Helpers
 {
     public class LoaderManager
     {
-        private static Dictionary<string, Hierarchy> loaderDict = new Dictionary<string, Hierarchy>
+        private static readonly LoaderManager instance = new LoaderManager();
+
+        public static LoaderManager GetInstance { get { return instance; } }
+
+        protected LoaderManager() { }
+
+        private Dictionary<string, Hierarchy> loaderDict = new Dictionary<string, Hierarchy>
         {
             { "Book", new Hierarchy(new EncyclopediaLoader(), new List<string>() { "Encyclopedia", "Fiction", "Historical" } ) },
             { "Encyclopedia", new Hierarchy(new EncyclopediaLoader(), new List<string>() ) },
@@ -26,7 +32,7 @@ namespace Lab_4.Helpers
             { "FairyTales", new Hierarchy(new FairyTalesLoader(), new List<string>() ) }
         };
 
-        private static Type[] types = new Type[]
+        private Type[] types = new Type[]
         {
             typeof(Book),
             typeof(Encyclopedia),
@@ -40,22 +46,22 @@ namespace Lab_4.Helpers
             typeof(FairyTales)
         };
 
-        public static Type[] GetTypes()
+        public Type[] GetTypes()
         {
             return types;
         }
 
-        public static BookLoader GetLoader(string key)
+        public BookLoader GetLoader(string key)
         {
             return loaderDict[key].Loader;
         }
 
-        public static List<string> GetChildren(string key)
+        public List<string> GetChildren(string key)
         {
             return loaderDict[key].BookChild;
         }
 
-        public static void AddLoader(string key, string parent, Hierarchy member)
+        public void AddLoader(string key, string parent, Hierarchy member)
         {
             try
             {

@@ -43,8 +43,8 @@ namespace Lab_4.Loaders
             g.Children.Add(FormCreator.CreateLabel("Publishing office", new Thickness(10, 128, 0, 0)));
             g.Children.Add(FormCreator.CreateTextBox("InpPublishing", b.PublishingOffice, new Thickness(10, 156, 0, 0)));
             g.Children.Add(FormCreator.CreateLabel("Book genre", new Thickness(10, 183, 0, 0)));
-
-            ComboBox cb = FormCreator.CreateComboBox("ChooseGenre", new Thickness(10, 211, 0, 0), LoaderManager.GetChildren("Book"));
+            
+            ComboBox cb = FormCreator.CreateComboBox("ChooseGenre", new Thickness(10, 211, 0, 0), LoaderManager.GetInstance.GetChildren("Book"));
             cb.SelectionChanged += new SelectionChangedEventHandler(SelectionChanged);
             g.Children.Add(cb);
 
@@ -276,7 +276,7 @@ namespace Lab_4.Loaders
                             item = words[i + 1];
                             try
                             {
-                                var loader = LoaderManager.GetLoader(words[i]);
+                                var loader = LoaderManager.GetInstance.GetLoader(words[i]);
                                 Book book = loader.Deserialize(item, serializer);
                                 bookListForm.Items.Add(new ItemInList { Type = words[i], Name = book.Name, Author = book.Author, Data = book });
                             }
@@ -366,7 +366,7 @@ namespace Lab_4.Loaders
                 foreach (Type item in pluginTypes)
                 {
                     IPlugin plugin = Activator.CreateInstance(item) as IPlugin;
-                    LoaderManager.AddLoader(plugin.GetName(), plugin.GetParent(), plugin.GetHierarchy());
+                    LoaderManager.GetInstance.AddLoader(plugin.GetName(), plugin.GetParent(), plugin.GetHierarchy());
                 }
             }
         }
@@ -413,7 +413,7 @@ namespace Lab_4.Loaders
                     try { type = ((GroupBox)temp[temp.Count - 2]).Header.ToString(); }  // get pre-last GroupBox Header, because last one is ButtonGroupBox
                     catch { type = "Book"; }
 
-                    BookLoader loader = LoaderManager.GetLoader(type);
+                    BookLoader loader = LoaderManager.GetInstance.GetLoader(type);
                     loader.Load(book);
                     AddMainMenu(sender);
                 }
@@ -434,7 +434,7 @@ namespace Lab_4.Loaders
                 Grid p = (Grid)oldGroupBox.Parent;                  // MainGrid
                 p.Children.Remove(oldGroupBox);                     // delete old MainGroupBox
 
-                var b = LoaderManager.GetLoader(selectedText);      // select Loader
+                var b = LoaderManager.GetInstance.GetLoader(selectedText);      // select Loader
 
                 Grid newGrid = b.Load(b.BaseCreate(oldGroupBox));   // create new Grid
                 AddMainMenu(sender);

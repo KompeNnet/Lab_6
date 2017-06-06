@@ -37,7 +37,7 @@ namespace Lab_4.Loaders
             grg.Children.Add(FormCreator.CreateTextBox("InpHistPeriod", h.Period, new Thickness(10, 38, 0, 0)));
             grg.Children.Add(FormCreator.CreateLabel("Type", new Thickness(10, 60, 0, 0)));
 
-            ComboBox cb = FormCreator.CreateComboBox("ChooseHistType", new Thickness(10, 88, 0, 0), LoaderManager.GetChildren("Historical"));
+            ComboBox cb = FormCreator.CreateComboBox("ChooseHistType", new Thickness(10, 88, 0, 0), LoaderManager.GetInstance.GetChildren("Historical"));
             cb.SelectionChanged += new SelectionChangedEventHandler(SelectionChanged);
             grg.Children.Add(cb);
 
