@@ -47,7 +47,7 @@ namespace Lab_4
 
                 MainGrid.Children.Add(newGroupBox);
 
-                if (FormatterManager.GetFormatters().Count != 0) MainGrid.Children.Add(loader.GetMenu(MainGrid));
+                if (FormatterManager.GetInstance.GetFormatters().Count != 0) MainGrid.Children.Add(loader.GetMenu(MainGrid));
             }
         }
     }

@@ -10,7 +10,7 @@ namespace Lab_4.Helpers.Serialization
 
         public static SerializerManager GetInstance { get { return instance; } }
 
-        protected SerializerManager() { }
+        private SerializerManager() { }
 
         private Dictionary<string, ISerializer> serializersDict = new Dictionary<string, ISerializer>
         {

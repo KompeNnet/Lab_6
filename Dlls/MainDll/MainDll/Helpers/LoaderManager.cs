@@ -16,7 +16,7 @@ namespace Lab_4.Helpers
 
         public static LoaderManager GetInstance { get { return instance; } }
 
-        protected LoaderManager() { }
+        private LoaderManager() { }
 
         private Dictionary<string, Hierarchy> loaderDict = new Dictionary<string, Hierarchy>
         {

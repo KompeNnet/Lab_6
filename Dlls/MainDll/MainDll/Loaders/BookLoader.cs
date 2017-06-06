@@ -97,9 +97,9 @@ namespace Lab_4.Loaders
 
         public Menu GetMenu(Grid g)
         {
-            if (FormatterManager.GetFormatters().Count != 0)
+            if (FormatterManager.GetInstance.GetFormatters().Count != 0)
             {
-                return FormatterManager.GetMenu();
+                return FormatterManager.GetInstance.GetMenu();
             }
             else return null;
         }
@@ -159,8 +159,7 @@ namespace Lab_4.Loaders
             ListView bookListForm = g.Children.OfType<ListView>().First(x => x.Name == "BookListForm");
 
             SaveFileDialog dlg = new SaveFileDialog() { FileName = "bookList.json" };
-            SerializerManager manager = SerializerManager.GetInstance;
-            foreach (string item in manager.GetAvailableFormats())
+            foreach (string item in SerializerManager.GetInstance.GetAvailableFormats())
             {
                 try { dlg.Filter += item.ToUpper() + " files | *." + item; }
                 catch { dlg.Filter += "| " + item.ToUpper() + " files | *." + item; }
@@ -170,7 +169,7 @@ namespace Lab_4.Loaders
             {
                 TextWriter writer = new StringWriter();
                 
-                ISerializer serializer = manager.GetSerializer((Path.GetExtension(dlg.FileName)).Substring(1));
+                ISerializer serializer = SerializerManager.GetInstance.GetSerializer((Path.GetExtension(dlg.FileName)).Substring(1));
                 foreach (ItemInList item in bookListForm.SelectedItems) { writer.WriteLine(" : " + item.Type + " : " + serializer.Serialize(item.Data)); }
 
                 try
@@ -181,7 +180,7 @@ namespace Lab_4.Loaders
                     foreach (MenuItem item in menu.Items)
                     {
                         MenuItem subItem = (MenuItem)item.Items[0];
-                        IFormatter formatter = FormatterManager.GetByKey(item.Name);
+                        IFormatter formatter = FormatterManager.GetInstance.GetByKey(item.Name);
                         if (subItem.IsChecked)
                         {
                             if (formatter.IsCompatible(Path.GetExtension(dlg.FileName)))
@@ -192,7 +191,7 @@ namespace Lab_4.Loaders
                                     string[] words = Regex.Split(writer.ToString(), " : ");
                                     for (int i = 2; i < words.Count(); i += 2)
                                     {
-                                        stream.WriteLine(" : " + words[i - 1] + " : " + formatter.Format(words[i]));
+                                        stream.WriteLine(formatter.Format(" : " + words[i - 1] + " : " + words[i]));
                                     }
                                 }
                                 finally { stream.Dispose(); stream.Close(); }
@@ -221,9 +220,8 @@ namespace Lab_4.Loaders
             ListView bookListForm = g.Children.OfType<ListView>().First(x => x.Name == "BookListForm");
 
             OpenFileDialog dlg = new OpenFileDialog();
-
-            SerializerManager manager = SerializerManager.GetInstance;
-            foreach (string item in manager.GetAvailableFormats())
+            
+            foreach (string item in SerializerManager.GetInstance.GetAvailableFormats())
             {
                 try { dlg.Filter += item.ToUpper() + " files | *." + item; }
                 catch { dlg.Filter += "| " + item.ToUpper() + " files | *." + item; }
@@ -232,7 +230,7 @@ namespace Lab_4.Loaders
             if (dlg.ShowDialog() == true)
             {
                 StreamReader reader = new StreamReader(dlg.OpenFile());
-                ISerializer serializer = manager.GetSerializer((Path.GetExtension(dlg.FileName)).Substring(1));
+                ISerializer serializer = SerializerManager.GetInstance.GetSerializer((Path.GetExtension(dlg.FileName)).Substring(1));
                 string item;
                 string loadingErrors = "";
                 try
@@ -249,7 +247,7 @@ namespace Lab_4.Loaders
                         foreach (MenuItem smth in menu.Items)
                         {
                             MenuItem subItem = (MenuItem)smth.Items[0];
-                            IFormatter formatter = FormatterManager.GetByKey(smth.Name);
+                            IFormatter formatter = FormatterManager.GetInstance.GetByKey(smth.Name);
                             if (subItem.IsChecked)
                             {
                                 if (formatter.IsCompatible(Path.GetExtension(dlg.FileName)))
@@ -259,7 +257,7 @@ namespace Lab_4.Loaders
                                     {
                                         for (int i = 2; i < words.Count(); i += 2)
                                         {
-                                            stream.WriteLine(" : " + words[i - 1] + " : " + formatter.ReFormat(words[i]));
+                                            stream.WriteLine(formatter.ReFormat(words[i]));
                                         }
                                         words = Regex.Split(stream.ToString(), " : ");
                                     }
@@ -348,11 +346,10 @@ namespace Lab_4.Loaders
             List<Type> pluginTypes = GetTypes<IFormatPlugin>(mainAssembly);
             if (pluginTypes.Count != 0)
             {
-                SerializerManager manager = SerializerManager.GetInstance;
                 foreach (Type item in pluginTypes)
                 {
                     IFormatPlugin plugin = Activator.CreateInstance(item) as IFormatPlugin;
-                    manager.LoadFormat(plugin.GetName(), plugin.GetSerializer());
+                    SerializerManager.GetInstance.LoadFormat(plugin.GetName(), plugin.GetSerializer());
                 }
             }
         }
@@ -384,7 +381,7 @@ namespace Lab_4.Loaders
                 foreach (Type item in pluginTypes)
                 {
                     IFormatterPlugin plugin = Activator.CreateInstance(item) as IFormatterPlugin;
-                    FormatterManager.AddFormatter(plugin.GetFunc(), plugin.GetFormatter(), plugin.GetMenuItem());
+                    FormatterManager.GetInstance.AddFormatter(plugin.GetFunc(), plugin.GetFormatter(), plugin.GetMenuItem());
                 }
             }
         }

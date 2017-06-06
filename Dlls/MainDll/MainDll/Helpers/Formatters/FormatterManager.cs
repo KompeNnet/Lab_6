@@ -6,9 +6,15 @@ namespace Lab_4.Helpers.Formatters
 {
     public class FormatterManager
     {
-        private static Dictionary<string, IFormatter> formatterDict = new Dictionary<string, IFormatter>();
+        private static readonly FormatterManager instance = new FormatterManager();
 
-        private static Menu menu = new Menu()
+        public static FormatterManager GetInstance { get { return instance; } }
+
+        private FormatterManager() { }
+
+        private Dictionary<string, IFormatter> formatterDict = new Dictionary<string, IFormatter>();
+
+        private Menu menu = new Menu()
         {
             Margin = new Thickness(0, 0, 0, 0),
             VerticalAlignment = VerticalAlignment.Top,
@@ -16,27 +22,27 @@ namespace Lab_4.Helpers.Formatters
             Name = "Formattions"
         };
         
-        public static void AddMenuItem(MenuItem newItem)
+        public void AddMenuItem(MenuItem newItem)
         {
             menu.Items.Add(newItem);
         }
 
-        public static Menu GetMenu()
+        public Menu GetMenu()
         {
             return menu;
         }
 
-        public static Dictionary<string, IFormatter> GetFormatters()
+        public Dictionary<string, IFormatter> GetFormatters()
         {
             return formatterDict;
         }
 
-        public static IFormatter GetByKey(string key)
+        public IFormatter GetByKey(string key)
         {
             return formatterDict[key];
         }
 
-        public static bool AddFormatter(string key, IFormatter formatter, MenuItem newItem)
+        public bool AddFormatter(string key, IFormatter formatter, MenuItem newItem)
         {
             try
             {
